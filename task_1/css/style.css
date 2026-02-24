@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+}
+
+label #input-text {
+    display: grid;
+}
+
+.alignment label {
+    display: flex;
+}
+
+#color-preview {
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#color-display {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    background-color: rgb(0, 0, 0);
+}
+
+.color-components {
+    display: grid;
+}
