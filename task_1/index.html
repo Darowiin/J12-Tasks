@@ -16,11 +16,11 @@
     <div class="font">
         <label for="font-family">Шрифт:
             <select id="font-family">
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Open Sans">Open Sans</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Courier New, monospace">Courier New</option>
+                <option value="Impact">Impact</option>
                 <option value="Roboto">Roboto</option>
-                <option value="Lato">Lato</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
             </select>
         </label>
 
@@ -56,17 +56,18 @@
 
     <div class="color-components">
         <label for="R">R:
-            <input type="range" id="R" value="0" min="0" max="255">
+            <input type="range" id="R-range" value="0" min="0" max="255">
             <input type="number" name="R-value" id="R-value" value="0" min="0" max="255">
         </label>
         <label for="G">G:
-            <input type="range" id="G" value="0" min="0" max="255">
+            <input type="range" id="G-range" value="0" min="0" max="255">
             <input type="number" name="G-value" id="G-value" value="0" min="0" max="255">
         </label>
         <label for="B">B:
-            <input type="range" id="B" value="0" min="0" max="255">
+            <input type="range" id="B-range" value="0" min="0" max="255">
             <input type="number" name="B-value" id="B-value" value="0" min="0" max="255">
         </label>
     </div>
 </body>
+<script src="js/text-styling.js"></script>
 </html>
