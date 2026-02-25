@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const oilPrices = {
-        '1': 65.95, '2': 66.38, '3': 65.97, '4': 65.77, '5': 67.4, '6': 68.61, '7': 70.99,
-        '8': 70.79, '9': 70.75, '10': 69.79, '11': 66.33, '12': 68.22, '13': 68.74, '14': 67.52,
-        '15': 67.92, '16': 67.77, '17': 67.87, '18': 68.94, '19': 68.93, '20': 69.66, '21': 67.7,
-        '22': 67.46, '23': 68.65, '24': 67.4, '25': 70.61, '26': 71.92, '27': 71.65,'28': 71.83,
-        '29': 71.49, '30': 72.36, '31': 71.39,
-    };
+    const oilPrices = [
+        65.95, 66.38, 65.97, 65.77, 67.4, 68.61, 70.99,
+        70.79, 70.75, 69.79, 66.33, 68.22, 68.74, 67.52,
+        67.92, 67.77, 67.87, 68.94, 68.93, 69.66, 67.7,
+        67.46, 68.65, 67.4, 70.61, 71.92, 71.65, 71.83,
+        71.49, 72.36, 71.39
+    ];
 
     function calculateMetrics(currentPrice, previousPrice) {
         const increase = currentPrice - previousPrice;
@@ -37,25 +37,24 @@ document.addEventListener('DOMContentLoaded', function() {
         increaseSum: 0,
         growthRateSum: 0,
         arrowUpCount: 0,
-        arrowDownCount: 0,
-        dataCount: Object.keys(oilPrices).length
+        arrowDownCount: 0
     };
 
-    for (let day in oilPrices) {
+    oilPrices.forEach((price, index) => {
+        const day = index + 1;
         const row = table.insertRow();
-        const price = oilPrices[day];
         
         row.insertCell(0).textContent = day;
         const arrowCell = row.insertCell(1);
         row.insertCell(2).textContent = price;
 
-        if (day == 1) {
+        if (index === 0) {
             row.insertCell(3).textContent = "-";
             row.insertCell(4).textContent = "-";
             row.insertCell(5).textContent = "-";
         } else {
-            const metrics = calculateMetrics(price, oilPrices[day - 1]);
-            row.insertCell(3).textContent = metrics.increase.toFixed(3);
+            const metrics = calculateMetrics(price, oilPrices[index - 1]);
+            row.insertCell(3).textContent = metrics.increase.toFixed(2);
             row.insertCell(4).textContent = metrics.growthRate.toFixed(2) + "%";
             row.insertCell(5).textContent = metrics.increaseRate.toFixed(2) + "%";
             
@@ -69,13 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         stats.maxPrice = Math.max(stats.maxPrice, price);
         stats.minPrice = Math.min(stats.minPrice, price);
-    }
+    });
 
     const lastRow = table.insertRow();
     lastRow.insertCell(0).textContent = "Итог";
     lastRow.insertCell(1).textContent = "";
     lastRow.insertCell(2).textContent = `Макс = ${stats.maxPrice.toFixed(2)}, Мин = ${stats.minPrice.toFixed(2)}`;
-    lastRow.insertCell(3).textContent = `Среднее = ${(stats.increaseSum / (stats.dataCount - 1)).toFixed(2)}`;
-    lastRow.insertCell(4).textContent = `Среднее = ${(stats.growthRateSum / (stats.dataCount - 1)).toFixed(2)}%`;
+    lastRow.insertCell(3).textContent = `Среднее = ${(stats.increaseSum / (oilPrices.length - 1)).toFixed(2)}`;
+    lastRow.insertCell(4).textContent = `Среднее = ${(stats.growthRateSum / (oilPrices.length - 1)).toFixed(2)}%`;
     lastRow.insertCell(5).textContent = `${stats.arrowUpCount}↑ ${stats.arrowDownCount}↓`;
 });
